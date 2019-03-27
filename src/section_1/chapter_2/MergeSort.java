@@ -1,12 +1,12 @@
 package section_1.chapter_2;
 
 public class MergeSort {
-    private MergeSort() {
-        int[] a = new int[20];
-        for (int i = 0; i < 20; i++)
-            a[i] = (int) Math.round(Math.random() * 100);
-        mergeSort(a);
-        for (int x : a) System.out.print(x + " ");
+    private int[] a;
+
+    private MergeSort(int[] a) {
+        this.a = a;
+        divide(a, 0, a.length - 1);
+        for (int x : a) System.out.print(x + ", ");
     }
 
     void divide(int[] a, int p, int r) {
@@ -19,45 +19,40 @@ public class MergeSort {
     }
 
     void merge(int[] a, int p, int q, int r) {
-        int m = q - p, n = r - q + 1;
+        int m = q - p + 1, n = r - q;
         int[] sa = new int[m], sb = new int[n];
         for (int i = 0; i < n; i++) {
             sa[i] = a[p + i];
-            sb[i] = a[q + 1 + i];
-            if (i == n - 1 && n < m)
-                sb[i + 1] = a[q + i + 2];
+            sb[i] = a[q + i + 1];
+            if (i == n - 1 && m > n)
+                sa[i + 1] = a[q];
         }
+
         int i = 0, j = 0, k = 0;
         while (j < m && k < n) {
-            if (sa[j] > sb[k]) {
-                a[i] = sa[j];
-                j++;
-            }
             if (sa[j] < sb[k]) {
-                a[i] = sb[j];
+                a[p + i] = sa[j];
+                j++;
+            } else {
+                a[p + i] = sb[k];
                 k++;
             }
             i++;
         }
         while (j < m) {
-            a[i] = sa[j];
+            a[p + i] = sa[j];
             j++;
             i++;
         }
         while (k < n) {
-            a[i] = sb[k];
+            a[p + i] = sb[k];
             k++;
             i++;
         }
     }
 
-    void mergeSort(int[] a) {
-        int l = a.length;
-        divide(a, 0, a.length - 1);
-    }
-
     public static void main(String[] args) {
-        new MergeSort();
+        int[] a = {37, 79, 39, 35, 71, 37, 31, 16, 60, 79, 18, 46, 4, 97, 22, 54, 88, 78, 27, 94, 1};
+        new MergeSort(a);
     }
-
 }
