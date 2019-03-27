@@ -20,7 +20,7 @@ public class MergeSort {
 
     void merge(int[] a, int p, int q, int r) {
         int m = q - p + 1, n = r - q;
-        int[] sa = new int[m], sb = new int[n];
+        int[] sa = new int[m + 1], sb = new int[n + 1];
         for (int i = 0; i < n; i++) {
             sa[i] = a[p + i];
             sb[i] = a[q + i + 1];
@@ -28,26 +28,18 @@ public class MergeSort {
                 sa[i + 1] = a[q];
         }
 
-        int i = 0, j = 0, k = 0;
-        while (j < m && k < n) {
-            if (sa[j] < sb[k]) {
-                a[p + i] = sa[j];
-                j++;
+        sa[m] = Integer.MAX_VALUE;
+        sb[n] = Integer.MAX_VALUE;
+
+        int i = 0, j = 0;
+        for (int k = p; k <= r; k++) {
+            if (sa[i] <= sb[j]) {
+                a[k] = sa[i];
+                i++;
             } else {
-                a[p + i] = sb[k];
-                k++;
+                a[k] = sb[j];
+                j++;
             }
-            i++;
-        }
-        while (j < m) {
-            a[p + i] = sa[j];
-            j++;
-            i++;
-        }
-        while (k < n) {
-            a[p + i] = sb[k];
-            k++;
-            i++;
         }
     }
 
