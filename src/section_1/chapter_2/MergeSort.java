@@ -27,10 +27,8 @@ public class MergeSort {
             if (i == n - 1 && m > n)
                 sa[i + 1] = a[q];
         }
-
         sa[m] = Integer.MAX_VALUE;
         sb[n] = Integer.MAX_VALUE;
-
         int i = 0, j = 0;
         for (int k = p; k <= r; k++) {
             if (sa[i] <= sb[j]) {
@@ -44,7 +42,8 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int[] a = {37, 79, 39, 35, 71, 37, 31, 16, 60, 79, 18, 46, 4, 97, 22, 54, 88, 78, 27, 94, 1};
+//        int[] a = {37, 79, 39, 35, 71, 37, 31, 16, 60, 79, 18, 46, 4, 97, 22, 54, 88, 78, 27, 94, 1};
+        int[] a = {5, 2, 4, 7, 1, 3, 2, 6};
         new MergeSort(a);
     }
 }
