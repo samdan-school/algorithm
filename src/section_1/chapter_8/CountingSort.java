@@ -8,13 +8,15 @@ public class CountingSort {
     private CountingSort(int[] a) {
         this.a = a;
         this.b = new int[a.length];
-        this.c = new int[getMax()];
+        this.c = new int[getMax() + 1];
 
-        for (int x: a) c[x - 1]++;
+        for (int x : a) c[x]++;
         for (int i = 1; i < c.length; i++) c[i] += c[i - 1];
         for (int i = 0; i < a.length; i++) {
-
+            b[c[a[i]] - 1] = a[i];
+            c[a[i]]--;
         }
+        for (int x : b) System.out.print(x + " ");
     }
 
     private int getMax() {
